@@ -1,0 +1,524 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUS Gaming Café</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #09090f;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(9, 9, 15, 0.9);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid #242436;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #a855f7;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #ddd;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #a855f7;
+    }
+
+    .nav-btn {
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      padding: 11px 20px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 8% 60px;
+      background:
+        radial-gradient(circle at 70% 30%, rgba(124,58,237,0.25), transparent 35%),
+        radial-gradient(circle at 20% 70%, rgba(236,72,153,0.15), transparent 30%);
+    }
+
+    .hero-content {
+      max-width: 700px;
+    }
+
+    .tag {
+      display: inline-block;
+      color: #c084fc;
+      border: 1px solid #7c3aed;
+      padding: 8px 15px;
+      border-radius: 30px;
+      margin-bottom: 22px;
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 7vw, 90px);
+      line-height: 0.95;
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, #a855f7, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: #aaa;
+      line-height: 1.7;
+      font-size: 18px;
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      color: white;
+    }
+
+    .secondary {
+      border: 1px solid #444;
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(168,85,247,0.3);
+    }
+
+    /* STATS */
+    .stats {
+      padding: 30px 8%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      background: #10101a;
+      border-top: 1px solid #242436;
+      border-bottom: 1px solid #242436;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat h2 {
+      color: #c084fc;
+      font-size: 32px;
+    }
+
+    .stat p {
+      color: #888;
+      margin-top: 5px;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 90px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: #888;
+    }
+
+    /* SETUPS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #151521, #0e0e16);
+      padding: 30px;
+      border: 1px solid #252538;
+      border-radius: 14px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #8b5cf6;
+      box-shadow: 0 15px 40px rgba(124,58,237,0.15);
+    }
+
+    .icon {
+      font-size: 38px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .price {
+      color: #c084fc;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    /* GAMES */
+    .games {
+      background: #0d0d15;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+    }
+
+    .game {
+      padding: 35px 20px;
+      text-align: center;
+      background: #151521;
+      border-radius: 12px;
+      border: 1px solid #26263a;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .game:hover {
+      background: #7c3aed;
+      transform: scale(1.04);
+    }
+
+    /* BOOKING */
+    .booking {
+      max-width: 850px;
+      margin: auto;
+      background: #13131f;
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid #29293d;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 15px;
+      background: #0b0b12;
+      border: 1px solid #33334a;
+      color: white;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: #a855f7;
+    }
+
+    .booking button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #07070b;
+      padding: 50px 8%;
+      text-align: center;
+      border-top: 1px solid #222;
+    }
+
+    footer h2 {
+      margin-bottom: 15px;
+    }
+
+    footer p {
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .copyright {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      nav ul {
+        display: none;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 55px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">NEXUS<span>GAMING</span></div>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#setup">Setups</a></li>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#booking">Booking</a></li>
+    </ul>
+
+    <a href="#booking" class="nav-btn">Book Now</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="tag">🔥 PREMIUM GAMING EXPERIENCE</div>
+
+      <h1>PLAY.<br><span>COMPETE.</span><br>DOMINATE.</h1>
+
+      <p>
+        Experience next-level gaming with high-end PCs, low latency,
+        competitive tournaments, and an amazing gaming community.
+      </p>
+
+      <div class="buttons">
+        <a href="#booking" class="btn primary">Book Your Setup</a>
+        <a href="#setup" class="btn secondary">Explore Setups</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <h2>40+</h2>
+      <p>Gaming PCs</p>
+    </div>
+
+    <div class="stat">
+      <h2>15+</h2>
+      <p>Popular Games</p>
+    </div>
+
+    <div class="stat">
+      <h2>144Hz</h2>
+      <p>High Refresh Displays</p>
+    </div>
+
+    <div class="stat">
+      <h2>24/7</h2>
+      <p>Gaming Community</p>
+    </div>
+  </div>
+
+  <!-- SETUPS -->
+  <section id="setup">
+    <div class="section-title">
+      <h2>Choose Your Battle Station</h2>
+      <p>From casual gaming to competitive esports.</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">🎮</div>
+        <h3>Standard Setup</h3>
+        <p>
+          Smooth gaming experience with powerful hardware and comfortable peripherals.
+        </p>
+        <div class="price">₹80 / Hour</div>
+      </div>
+
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Pro Setup</h3>
+        <p>
+          High-performance PC with a 144Hz monitor for competitive gaming.
+        </p>
+        <div class="price">₹120 / Hour</div>
+      </div>
+
+      <div class="card">
+        <div class="icon">👑</div>
+        <h3>VIP Setup</h3>
+        <p>
+          Premium gaming station with top-tier hardware and maximum comfort.
+        </p>
+        <div class="price">₹180 / Hour</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GAMES -->
+  <section class="games" id="games">
+    <div class="section-title">
+      <h2>Popular Games</h2>
+      <p>Play the games you love with your friends.</p>
+    </div>
+
+    <div class="game-grid">
+      <div class="game">VALORANT</div>
+      <div class="game">COUNTER-STRIKE 2</div>
+      <div class="game">GTA V</div>
+      <div class="game">FORTNITE</div>
+      <div class="game">CALL OF DUTY</div>
+      <div class="game">MINECRAFT</div>
+      <div class="game">FIFA / EA FC</div>
+      <div class="game">APEX LEGENDS</div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking">
+    <div class="section-title">
+      <h2>Book Your Gaming Session</h2>
+      <p>Reserve your setup and get ready to play.</p>
+    </div>
+
+    <div class="booking">
+      <form onsubmit="bookSetup(event)">
+        <div class="form-grid">
+
+          <input type="text" id="name" placeholder="Your Name" required>
+
+          <input type="tel" id="phone" placeholder="Phone Number" required>
+
+          <select id="setupType" required>
+            <option value="">Choose Setup</option>
+            <option>Standard Setup</option>
+            <option>Pro Setup</option>
+            <option>VIP Setup</option>
+          </select>
+
+          <input type="date" required>
+
+        </div>
+
+        <button type="submit">CONFIRM BOOKING</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <h2>NEXUS GAMING CAFÉ</h2>
+    <p>Level up your gaming experience.</p>
+    <p>📍 Your City | 📞 +91 XXXXX XXXXX</p>
+
+    <div class="copyright">
+      © 2026 Nexus Gaming Café. All Rights Reserved.
+    </div>
+  </footer>
+
+  <script>
+    function bookSetup(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const setup = document.getElementById("setupType").value;
+
+      alert(
+        "Thanks " + name + "! Your request for the " +
+        setup + " has been received. We will contact you soon!"
+      );
+    }
+  </script>
+
+</body>
+</html>
+```
